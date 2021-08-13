@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
   //List<NewsfeedModel>? news;
 
 
-  void fetch_genres() async {
+  void fetch_categories() async {
     setState(() {
       _fetching = true;
     });
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
           options: Options(
               validateStatus: (status) => status! < 500,
               headers: {
-                "Authorization":"Bearer $access"
+                "Authorization":"Bearer $access",
               }
           )
       );
@@ -76,41 +76,13 @@ class _HomePageState extends State<HomePage> {
       print(e);
     }
   }
-  // void fetch_newsfeed() async {
-  //   setState(() {
-  //     _fetching = true;
-  //   });
-  //   try {
-  //     SharedPreferences prefs= await SharedPreferences.getInstance();
-  //     String? token = prefs.get("access") as String?;
-  //     Response response = await dioClient.ref.get("/newsfeed/",
-  //         options: Options(
-  //             validateStatus: (status) => status! < 500,
-  //             headers: {
-  //               "Authorization":"Bearer $token"
-  //             }
-  //         )
-  //     );
-  //     setState(() {
-  //       news =newsfeedModelFromJson(jsonEncode(response.data));
-  //       _fetching = false;
-  //       //print(categories!.totalCount);
-  //
-  //     });
-  //     print(response);
-  //   } catch (e) {
-  //     setState(() {
-  //       _fetching = false;
-  //     });
-  //     print(e);
-  //   }
-  // }
+ 
 
 
   @override
   void initState() {
-    fetch_genres();
-    //fetch_newsfeed();
+    fetch_categories();
+
     super.initState();
   }
   @override
