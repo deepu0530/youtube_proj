@@ -17,7 +17,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final passwordController = TextEditingController();
   final confirmpasswordController = TextEditingController();
   bool _loading = false;
-  Future<void> performRegister() async {
+  Future<void> performSignup() async {
     String name = usernameController.text.trim();
     String pass = passwordController.text.trim();
     String rePass = confirmpasswordController.text.trim();
@@ -109,7 +109,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               ElevatedButton(
                   onPressed: () {
-                   
+                   performSignup();
                   },
                   child: Text(
                     "SignUp",
