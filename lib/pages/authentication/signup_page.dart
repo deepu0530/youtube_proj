@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:youtube_project/managers/auth_manager.dart';
+import 'package:youtube_project/network_call/base_response.dart';
+import 'package:youtube_project/pages/HomePage.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({ Key? key }) : super(key: key);
@@ -9,12 +13,44 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
 
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmpasswordController = TextEditingController();
+  bool _loading = false;
+  Future<void> performRegister() async {
+    String name = usernameController.text.trim();
+    String pass = passwordController.text.trim();
+    String rePass = confirmpasswordController.text.trim();
+    if (name.isEmpty || pass.isEmpty|| rePass.isEmpty) {
 
-TextEditingController usernameController=TextEditingController();
+      Fluttertoast.showToast( msg:"enter details");
+      return;
+    }
 
-TextEditingController passwordController=TextEditingController();
+    FocusScope.of(context).requestFocus(FocusNode());
 
-TextEditingController confirmpasswordController=TextEditingController();
+    setState(() {
+      _loading = true;
+    });
+
+    final response = await authManager.preformRegister(name , pass , rePass);
+    setState(() {
+      _loading = false;
+    });
+
+    if (response.status == ResponseStatus.SUCCESS) {
+      Fluttertoast.showToast(msg:response.message);
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>HomePage()));
+      // NavigationService().navigatePage(HomePage());
+    } else {
+      Fluttertoast.showToast(msg:response.message);
+    }
+  }
+// TextEditingController usernameController=TextEditingController();
+
+// TextEditingController passwordController=TextEditingController();
+
+// TextEditingController confirmpasswordController=TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -108,3 +144,5 @@ TextEditingController confirmpasswordController=TextEditingController();
     );
   }
 }
+
+
