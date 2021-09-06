@@ -52,32 +52,33 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 import 'package:youtube_project/models/categories.dart';
+import 'package:youtube_project/models/channels_model.dart';
 import 'package:youtube_project/network_call/base_network.dart';
 import 'package:youtube_project/network_call/base_response.dart';
 import 'package:youtube_project/utils/urls.dart';
 
 
-class CategoriesManager {
-  factory CategoriesManager() {
+class ChannelsManager {
+  factory ChannelsManager() {
     return _singleton;
   }
 
-  CategoriesManager._internal();
+  ChannelsManager._internal();
 
-  static final CategoriesManager _singleton = CategoriesManager._internal();
+  static final ChannelsManager _singleton = ChannelsManager._internal();
 
-  Future<ResponseData> fetchCategories( ) async {
+  Future<ResponseData> fetchChannels( ) async {
 
     Response response;
     try {
       response = await dioClient.ref
-          .get<dynamic>(URLS.baseUrl+URLS.categories);
+          .get<dynamic>(URLS.baseUrl+URLS.channels);
 
       if(response.statusCode == 200) {
-        CategoriesModel categoriesModel;
-        categoriesModel =categoriesModelFromJson(jsonEncode(response.data));
+        ChannelsModel channelsModel;
+        channelsModel =channelsModelFromJson(jsonEncode(response.data));
        // categoriesModel = categoriesModelFromMap(jsonEncode(response.data));
-        return ResponseData("success", ResponseStatus.SUCCESS ,data: categoriesModel);
+        return ResponseData("success", ResponseStatus.SUCCESS ,data: channelsModel);
       } else {
         var message = "Unknown error";
         if(response.data?.containsKey("message") == true){
@@ -93,4 +94,4 @@ class CategoriesManager {
 
 }
 
-CategoriesManager categoriesManager = CategoriesManager() ;
+ChannelsManager channelsManager = ChannelsManager() ;
