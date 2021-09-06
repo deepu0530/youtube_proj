@@ -71,11 +71,12 @@ class CategoriesManager {
     Response response;
     try {
       response = await dioClient.ref
-          .get<dynamic>(URLS.baseUrl+"/category/?category_id=1");
+          .get<dynamic>(URLS.baseUrl+"/categories/");
 
       if(response.statusCode == 200) {
         CategoriesModel categoriesModel;
-        categoriesModel = categoriesModelFromMap(jsonEncode(response.data));
+        categoriesModel =categoriesModelFromJson(jsonEncode(response.data));
+       // categoriesModel = categoriesModelFromMap(jsonEncode(response.data));
         return ResponseData("success", ResponseStatus.SUCCESS ,data: categoriesModel);
       } else {
         var message = "Unknown error";

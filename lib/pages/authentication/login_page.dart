@@ -257,7 +257,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   )),
               SizedBox(
-                height: 20,
+                height: 25,
               ),
               GestureDetector(
                 onTap: (){
@@ -268,13 +268,13 @@ class _LoginPageState extends State<LoginPage> {
                     text: TextSpan(children: [
                   TextSpan(
                       text: 'Dont have an account ?',
-                      style: TextStyle(color: Colors.black, fontSize: 14)),
+                      style: TextStyle(color: Colors.black, fontSize: 16)),
                   TextSpan(
-                      text: ' Signup',
+                      text: '  Signup',
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
-                          fontSize: 14)),
+                          fontSize: 16)),
                 ])),
               )
             ],
