@@ -384,53 +384,64 @@ DeleteCategoryModel? _deleteCategoryModel;
                 itemCount: _categoriesModel!.videos!.length,
                 itemBuilder: (context, index) => Padding(
                   padding: EdgeInsets.only(top: 20, left: 15, right: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Text("${_categoriesModel!.videos![index].categoryId}",
-                           style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(width: 10,),
-                          Text(
-                            " ${_categoriesModel!.videos![index].name}",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
+                  child: GestureDetector(
+                    onTap:(){
+ Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Channels(
+                          categid: _categoriesModel!.videos![index].categoryId,
+                        ),
                       ),
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onTap: (){
-                              _patchDialog(context);
-                            },
-                            child: Icon(
-                              Icons.edit,
-                              color: Colors.blue,
+          );
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Text("${_categoriesModel!.videos![index].categoryId}",
+                             style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
                             ),
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          GestureDetector(
-                            onTap: (){
-                              _deletecategory(context);
-                            },
-                            child: Icon(
-                              Icons.delete,
-                              color: Colors.red,
+                            SizedBox(width: 10,),
+                            Text(
+                              " ${_categoriesModel!.videos![index].name}",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: (){
+                                _patchDialog(context);
+                              },
+                              child: Icon(
+                                Icons.edit,
+                                color: Colors.blue,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            GestureDetector(
+                              onTap: (){
+                                _deletecategory(context);
+                              },
+                              child: Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

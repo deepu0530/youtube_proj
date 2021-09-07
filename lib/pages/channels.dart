@@ -1,12 +1,19 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:youtube_project/managers/channels_manager.dart';
 import 'package:youtube_project/models/channels_model.dart';
+import 'package:youtube_project/models/patch_channel_model.dart';
+import 'package:youtube_project/network_call/base_network.dart';
 import 'package:youtube_project/network_call/base_response.dart';
 
 class Channels extends StatefulWidget {
-  const Channels({ Key? key }) : super(key: key);
-
+  Channels({this.categid }
+  );
+ int? categid;
   @override
   _ChannelsState createState() => _ChannelsState();
 }
@@ -19,8 +26,9 @@ class _ChannelsState extends State<Channels> {
     setState(() {
       _loading = true;
     });
+    final response = await channelsManager.fetchChannelsManager(widget.categid);
 
-    final response = await channelsManager.fetchChannels();
+    
 
     setState(() {
       _loading = false;
@@ -38,11 +46,12 @@ class _ChannelsState extends State<Channels> {
     }
   }
 
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    fetchChannels();
+  fetchChannels();
   }
 
   @override
@@ -71,19 +80,16 @@ class _ChannelsState extends State<Channels> {
                   padding: EdgeInsets.only(top: 20, left: 15, right: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                   //crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
+                        
                         children: [
-                          // CircleAvatar(
-                          //   radius: 27,
-                          //   backgroundImage: NetworkImage("${_channelsModel!.videos![index].profilePic}"),
-                          // ),
-                          Text("${_channelsModel!.videos![index].categoryId}",
-                           style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
+                          CircleAvatar(
+                            radius: 24,
+                            backgroundImage: NetworkImage("${_channelsModel!.videos![index].profilePic}"),
                           ),
+                         
                           SizedBox(width: 10,),
                           Text(
                             " ${_channelsModel!.videos![index].name}",
@@ -92,13 +98,51 @@ class _ChannelsState extends State<Channels> {
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
                           ),
+                         // SizedBox(width: 10,),
+                           Text("${_channelsModel!.videos![index].channelId}",
+                           style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ],
                       ),
-                      
+                      Row(
+                          children: [
+                            GestureDetector(
+                              onTap: (){
+                               // _patchDialog(context);
+                              },
+                              child: Icon(
+                                Icons.edit,
+                                color: Colors.blue,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            GestureDetector(
+                              onTap: (){
+                               // _deletecategory(context);
+                              },
+                              child: Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ],
+                        )
                     ],
                   ),
                 ),
               ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+         //_displayDialog(context);
+          // Add your onPressed code here!
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

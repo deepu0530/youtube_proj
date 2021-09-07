@@ -59,6 +59,7 @@ import 'package:youtube_project/utils/urls.dart';
 
 
 class ChannelsManager {
+   
   factory ChannelsManager() {
     return _singleton;
   }
@@ -67,12 +68,12 @@ class ChannelsManager {
 
   static final ChannelsManager _singleton = ChannelsManager._internal();
 
-  Future<ResponseData> fetchChannels( ) async {
+  Future<ResponseData> fetchChannelsManager(int? categid ) async {
 
     Response response;
     try {
       response = await dioClient.ref
-          .get<dynamic>(URLS.baseUrl+URLS.channels);
+          .get<dynamic>(URLS.baseUrl+"/category_channels/?category_id=${categid}");
 
       if(response.statusCode == 200) {
         ChannelsModel channelsModel;

@@ -31,18 +31,19 @@ class _HomePageState extends State<HomePage> {
                   },
                 )),
                 SizedBox(height: 30,),
-                 Center(child: RaisedButton(
-                  child: new Text('Channels'),
-                  onPressed: () {
+                //  Center(child: RaisedButton(
+                //   child: new Text('Channels'),
+                //   onPressed: () {
                    
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => Channels(
-                        ),
-                      ),
-                    );
-                  },
-                ))
+                //     Navigator.of(context).push(
+                //       MaterialPageRoute(
+                //         builder: (context) => Channels(
+                         
+                //         ),
+                //       ),
+                //     );
+                //   },
+                // ))
         ],
       ),),
         floatingActionButton: FloatingActionButton(
