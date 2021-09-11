@@ -92,7 +92,8 @@ class URLS {
   static String login = "/api/token/";
   static String signUp = "/sign_up/";
   static String categories = "/categories/";
-  static String channels = "/category_channels/";
+  //static String channels = "/category_channels/";
+  
   // static String verifyOTP = "/verify_otp/";
   // static String categoriesList = "/list_categories/";
   // static String categoriesDetails = "/category_details/";

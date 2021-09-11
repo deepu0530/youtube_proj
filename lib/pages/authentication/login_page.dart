@@ -167,8 +167,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:youtube_project/managers/auth_manager.dart';
 import 'package:youtube_project/network_call/base_response.dart';
-import 'package:youtube_project/pages/HomePage.dart';
+
 import 'package:youtube_project/pages/authentication/signup_page.dart';
+import 'package:youtube_project/pages/categories.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -192,7 +193,7 @@ class _LoginPageState extends State<LoginPage> {
       _loading = true;
     });
 
-    final response = await authManager.performLogin(name , pass);
+    final response = await authManager.PerformLogin(name , pass);
 
     setState(() {
       _loading = false;
@@ -200,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
 
     if (response.status == ResponseStatus.SUCCESS) {
       Fluttertoast.showToast(msg:response.message);
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>HomePage()));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Categories()));
       // NavigationService().navigatePage(HomePage());
     } else {
       Fluttertoast.showToast(msg:response.message);

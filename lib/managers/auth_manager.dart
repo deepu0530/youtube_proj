@@ -57,7 +57,7 @@ class AuthManager {
 
   static final AuthManager _singleton = AuthManager._internal();
 
-  Future<ResponseData> performLogin(String userName , String password) async {
+  Future<ResponseData> PerformLogin(String userName , String password) async {
     final formData = FormData.fromMap({
       "username": userName,
       "password": password
@@ -85,7 +85,7 @@ class AuthManager {
     }
   }
 
-  Future<ResponseData> preformRegister(String userName, String pass , String rePass) async {
+  Future<ResponseData> PreformRegister(String userName, String pass , String rePass) async {
     final formData = FormData.fromMap({
       "username": userName,
       "password": pass,
